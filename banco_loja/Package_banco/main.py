@@ -7,18 +7,19 @@ def conectar_banco():
     return conexão_bd, c
 
 # Função para estabelecer a conexão com o banco de dados
-
+if __name__ == "__main__":
+    # Conecte-se ao banco de dados
+    conexão_bd, c = conectar_banco()
 
 a = Menu()
 while True:
-    
     a.cabeçalho()
+
     try:
         escolha = int(input("Digite qual deseja: "))
-    
         if escolha == 1:
-                Cliente.view_cliente()
-                break
+                cliente = Cliente(conexão_bd, c)
+                cliente.exibir_menu()
         elif escolha == 2:
                 print("Escolheu 2")
                 break
@@ -39,8 +40,10 @@ while True:
         print("Digite um valor valido entre 1 e 6")
         continue
 
-    
+        
 
 
     
+
+
     

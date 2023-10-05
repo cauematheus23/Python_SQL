@@ -1,11 +1,11 @@
 from cores import cores
 class Menu():
     def cabeçalho (self):
-        print('\033[34m-'*40)
-        print('LOJA PODS'.center(40))
-        print('-'*40)
-        print('\033[m')
         escolher = cores()
+        print('\033[34m-'*40)
+        print('|',end='')
+        print('LOJA PODS'.center(38),end ='|\n')
+        print('-'*40, '\033[m')
         print(escolher.amarelo('[1] Clientes'))
         print(escolher.amarelo('[2] Produto'))
         print(escolher.amarelo('[3] Pedido'))
