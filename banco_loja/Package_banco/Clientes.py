@@ -2,6 +2,7 @@ from tabulate import tabulate
 from cores import cores
 import random
 import string
+import tkinter as tk
 
 
 class Cliente:
@@ -10,6 +11,10 @@ class Cliente:
         self.c = c
     
     def exibir_menu(self):
+        janela = tk.Tk()
+        janela.title("Inserir Dados de Cliente")
+        janela.geometry("400x300")  # Largura x Altura
+
         while True:
             escolher = cores()
 
@@ -20,7 +25,7 @@ class Cliente:
                 if opção == 1:
                     (self.view_cliente())
                 elif opção == 2:
-                    self.inserir_cliente()
+                    self.menuzinho()
                 elif opção == 3:
                     self.atualizar_cliente()
                 elif opção == 4:
@@ -51,34 +56,65 @@ class Cliente:
 
         except Exception as e:
             print("Erro ao consultar dados:", str(e))
-
     def inserir_cliente(self):
         try:
-            # Define the SQL query to insert data into the CLIENTE table
+            # Obtenha os valores dos campos de entrada
+            cpf = self.entrada_cpf.get()
+            nome = self.entrada_nome.get()
+            email = self.entrada_email.get()
+            endereco = self.entrada_endereco.get()
+            telefone = self.entrada_telefone.get()
+
+            # Define a consulta SQL para inserir dados na tabela CLIENTE
             sql = "INSERT INTO CLIENTE (CPF, Nome, Email, Endereco, Telefone) VALUES (?, ?, ?, ?, ?)"
 
-            # Prompt the user for input data
-            cpf = input("Digite o CPF: ")
-            nome = input("Digite o nome: ")
-            email = input("Digite o Email: ")
-            endereco = input("Digite o Endereço: ")
-            telefone = input("Digite o Telefone: ")
-
-            # Create a tuple with the input values
+            # Crie uma tupla com os valores de entrada
             valores = (cpf, nome, email, endereco, telefone)
 
-            # Execute the SQL query with the input values
+            # Execute a consulta SQL com os valores de entrada
             self.c.execute(sql, valores)
 
-            # Commit the changes to the database
-            self.conexão_bd.commit()
+            # Faça o commit das alterações no banco de dados
+            self.conexao_bd.commit()
 
-            print(self.c.rowcount, "record inserted.")
+            print("Dados inseridos com sucesso.")
         except Exception as e:
-            # Handle exceptions and print the error message
+            # Trate as exceções e imprima a mensagem de erro
             print("Erro ao inserir dados:", str(e))
+    def menuzinho(self,janela):
+        self.janela = janela
+        self.janela.title("Inserir Dados de Cliente")
 
+        self.label_cpf = tk.Label(janela, text="CPF:")
+        self.label_cpf.pack()
+        self.entrada_cpf = tk.Entry(janela)
+        self.entrada_cpf.pack()
 
+        self.label_nome = tk.Label(janela, text="Nome:")
+        self.label_nome.pack()
+        self.entrada_nome = tk.Entry(janela)
+        self.entrada_nome.pack()
+
+        self.label_email = tk.Label(janela, text="Email:")
+        self.label_email.pack()
+        self.entrada_email = tk.Entry(janela)
+        self.entrada_email.pack()
+
+        self.label_endereco = tk.Label(janela, text="Endereço:")
+        self.label_endereco.pack()
+        self.entrada_endereco = tk.Entry(janela)
+        self.entrada_endereco.pack()
+
+        self.label_telefone = tk.Label(janela, text="Telefone:")
+        self.label_telefone.pack()
+        self.entrada_telefone = tk.Entry(janela)
+        self.entrada_telefone.pack()
+
+        self.botao_inserir = tk.Button(janela, text="Inserir Dados", command=self.inserir_cliente)
+        self.botao_inserir.pack()
+
+       
+        
     def atualizar_cliente(self):
         try:
             # SQL para atualizar todos os dados de um cliente com base no CPF
