@@ -4,7 +4,7 @@ import sqlite3
 conn = sqlite3.connect('banco_loja.db')
 cursor = conn.cursor()
 
-# Modifique a tabela Cliente para usar CPF como chave primária
+"""# Modifique a tabela Cliente para usar CPF como chave primária
 cursor.execute('''
     CREATE TABLE Cliente (
         CPF INTEGER PRIMARY KEY,
@@ -57,8 +57,9 @@ cursor.execute('''
         IDProduto INTEGER,
         FOREIGN KEY (IDProduto) REFERENCES Produto(ID)
     )
-''')
+''')"""
 # Salve as alterações e feche a conexão
+cursor.execute('''ALTER TABLE cliente ADD COLUMN ID INTEGER AUTOINCREMENT''')
 conn.commit()
 conn.close()
 

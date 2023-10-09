@@ -10,35 +10,37 @@ class Cliente:
         self.conexão_bd = conexão_bd
         self.c = c
     
+    
+
+    def opcao_menu(self,opcao):
+        try:
+            print('[1] Consultar Cliente\n[2] Inserir Cliente\n[3] Atualizar Cliente\n[4] Deletar Cliente\n[5] Voltar')
+            opção = int(input("Escolha uma opção: "))
+
+            if opção == 1:
+                self.view_cliente()
+            elif opção == 2:
+                self.menuzinho()
+            elif opção == 3:
+                self.atualizar_cliente()
+            elif opção == 4:
+                self.deletar_cliente()
+            elif opção == 5:
+                self.consultar_cliente()
+            elif opção == 6:
+                print('a')
+            else:
+                print("Opção inválida")
+        except (ValueError,TypeError):
+                print("Por Favor, Digite um valor válido")
     def exibir_menu(self):
         janela = tk.Tk()
         janela.title("Inserir Dados de Cliente")
         janela.geometry("400x300")  # Largura x Altura
 
-        while True:
-            escolher = cores()
 
-            try:
-                print('[1] Consultar Cliente\n[2] Inserir Cliente\n[3] Atualizar Cliente\n[4] Deletar Cliente\n[5] Voltar')
-                opção = int(input("Escolha uma opção: "))
 
-                if opção == 1:
-                    (self.view_cliente())
-                elif opção == 2:
-                    self.menuzinho()
-                elif opção == 3:
-                    self.atualizar_cliente()
-                elif opção == 4:
-                    self.deletar_cliente()
-                elif opção == 5:
-                    self.consultar_cliente()
-                elif opção == 6:
-                    break
-                else:
-                    print("Opção inválida")
-            except (ValueError,TypeError):
-                print("Por Favor, Digite um valor válido")
-                continue
+                
 
     def view_cliente(self):
         try:

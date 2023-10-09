@@ -3,7 +3,7 @@ from Clientes import Cliente
 from menu import Menu
 import tkinter as tk
 def conectar_banco():
-    conexão_bd = sqlite3.connect('C:/Users/cauem/Documents/GitHub/Python_SQL/banco_loja/banco_loja.db')
+    conexão_bd = sqlite3.connect('C:/Users/cauem/OneDrive/Documentos/MeusProjetos/Python_SQL/banco_loja/banco_loja.db')
     c = conexão_bd.cursor()
     return conexão_bd, c
 
