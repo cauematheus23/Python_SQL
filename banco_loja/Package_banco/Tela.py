@@ -13,7 +13,7 @@ class Funcs():
         self.cidade_entry.delete(0,END)
         self.email_entry.delete(0,END)
     def conecta_banco(self):
-        self.conexão_bd = sqlite3.connect('C:/Users/cauem/Documents/GitHub/Python_SQL/banco_loja/banco_loja.db')
+        self.conexão_bd = sqlite3.connect('C:/Users/cauem/OneDrive/Documentos/MeusProjetos/Python_SQL/banco_loja/banco_loja.db')
         self.c = self.conexão_bd.cursor()
 
     def desconectar(self):
@@ -92,6 +92,7 @@ class Interface(Funcs):
         self.widgets_frame1()
         self.widgets_frame2()
         self.select_lista()
+        self.Menus()
         root.mainloop()
     def tela(self):
         self.root.title("Cadastro de Clientes")
@@ -196,4 +197,17 @@ class Interface(Funcs):
         self.scrool.place(relx=0.96,rely=0.1,relwidth=0.04,relheight=0.85)
         self.listacliente.bind('<Double-1>', self.OnDoubleClick)
 
+    def Menus(self):
+        menubar = Menu(self.root)
+        self.root.config(menu=menubar)
+        filemenu = Menu(menubar)
+        filemenu2 = Menu(menubar)
+
+        def quit() : self.root.destroy()
+
+        menubar.add_cascade(label= "Opções", menu = filemenu)
+        menubar.add_cascade(label= "Sobre", menu = filemenu2)
+
+        filemenu.add_command(label="Sair", command=quit)
+        filemenu.add_command(label= "Limpar Cliente", command = self.limpa_tela)
 Interface()
