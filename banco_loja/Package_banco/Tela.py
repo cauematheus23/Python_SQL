@@ -63,6 +63,7 @@ class Funcs():
             self.email_entry.insert(END,col5)
             self.cidade_entry.insert(END,col6)
     def deleta_cliente(self):
+
     
         self.variaveis()
         self.conecta_banco()
@@ -71,6 +72,17 @@ class Funcs():
         self.desconectar()
         self.limpa_tela()
         self.select_lista()
+    def atualiza_cliente(self):
+        self.variaveis()
+        self.conecta_banco()
+        sql = """UPDATE cliente set cpf = ?,Nome = ?, Telefone = ?, Email = ?, cidade = ? where id = ?"""
+        valores =  (self.cpf, self.nome, self.telefone,self.email,self.cidade,self.id)
+        self.c.execute(sql,valores)
+        self.conexão_bd.commit()
+
+        self.desconectar()
+        self.select_lista()
+        self.limpa_tela()
 class Interface(Funcs):
 
     def __init__(self):
@@ -101,11 +113,11 @@ class Interface(Funcs):
          ### Criação do botao Buscar
         self.bt_buscar = Button(self.frame_1, text= 'Buscar', bd=2,bg = '#107db2', fg= 'white', font = ('verdana' , 8 , 'bold'))
         self.bt_buscar.place(relx = 0.3, rely= 0.1, relwidth= 0.1, relheight= 0.15)
-        ### Criação do botao Buscar
+        ### Criação do botao Novo
         self.bt_novo = Button(self.frame_1, text= 'Novo', bd=2,bg = '#107db2', fg= 'white', font = ('verdana' , 8 , 'bold'), command=self.add_cliente)
         self.bt_novo.place(relx = 0.5, rely= 0.1, relwidth= 0.1, relheight= 0.15)
-        ### Criação do botao Buscar
-        self.bt_alterar = Button(self.frame_1, text= 'Alterar', bd=2,bg = '#107db2', fg= 'white', font = ('verdana' , 8 , 'bold'))
+        ### Criação do botao Alterar
+        self.bt_alterar = Button(self.frame_1, text= 'Alterar', bd=2,bg = '#107db2', fg= 'white', font = ('verdana' , 8 , 'bold'),command=self.atualiza_cliente)
         self.bt_alterar.place(relx = 0.6, rely= 0.1, relwidth= 0.1, relheight= 0.15)
         ### Criação do botao Buscar
         self.bt_apagar = Button(self.frame_1, text= 'Apagar', bd=2,bg = '#107db2', fg= 'white', font = ('verdana' , 8 , 'bold'),command=self.deleta_cliente)
