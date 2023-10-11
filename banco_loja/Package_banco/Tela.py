@@ -13,7 +13,7 @@ class Funcs():
         self.cidade_entry.delete(0,END)
         self.email_entry.delete(0,END)
     def conecta_banco(self):
-        self.conexão_bd = sqlite3.connect('C:/Users/cauem/OneDrive/Documentos/MeusProjetos/Python_SQL/banco_loja/banco_loja.db')
+        self.conexão_bd = sqlite3.connect('C:/Users/cauem/Documents/GitHub/Python_SQL/banco_loja/banco_loja.db')
         self.c = self.conexão_bd.cursor()
 
     def desconectar(self):
