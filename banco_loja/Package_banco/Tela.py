@@ -1,7 +1,33 @@
 from tkinter import *
 from tkinter import ttk
 import sqlite3
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import SimpleDocTemplate, Image
+import webbrowser
 root = Tk()
+
+class Relatorios():
+    def printCliente(self):
+        webbrowser.open("cliente.pdf")
+    def geraRelatCliente(self):
+        self.can = canvas.Canvas("cliente.pdf")
+
+        self.idRel = self.id_entry.get()
+        self.cpfRel = self.cpf_entry.get()
+        self.telefoneRel = self.telefone_entry.get()
+        self.cidadeRel = self.cidade_entry.get()
+        self.emailRel = self.email_entry.get()
+
+        self.can.setFont("Helvetica-Bold", 24)
+        self.can.drawString(200, 790, 'Ficha do Cliente')
+        self.can.setFont("Helvetica-Bold",18)
+        self.can.drawString()
+        self.can.showPage()
+        self.can.save()
+        self.printCliente()
 
 
 class Funcs():
@@ -83,7 +109,7 @@ class Funcs():
         self.desconectar()
         self.select_lista()
         self.limpa_tela()
-class Interface(Funcs):
+class Interface(Funcs,Relatorios):
 
     def __init__(self):
         self.root = root 
@@ -206,8 +232,9 @@ class Interface(Funcs):
         def quit() : self.root.destroy()
 
         menubar.add_cascade(label= "Opções", menu = filemenu)
-        menubar.add_cascade(label= "Sobre", menu = filemenu2)
+        menubar.add_cascade(label= "Relatorios", menu = filemenu2)
 
         filemenu.add_command(label="Sair", command=quit)
         filemenu.add_command(label= "Limpar Cliente", command = self.limpa_tela)
-Interface()
+        filemenu2.add_command(label= "Ficha do Cliente", command = self.geraRelatCliente)
+#Interface()
